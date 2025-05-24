@@ -1,31 +1,41 @@
 'use client';
 
- // any component that uses useAuth needs this because if a component directly imports useAuth, it needs to be a client component since useAuth uses React hooks.
+import React, { useEffect, useState } from 'react';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import { getMealsByUser } from '../api/mealData';
+import { useAuth } from '../utils/context/authContext';
+import MealCard from '../components/MealCard';
 
-import { Button } from 'react-bootstrap';
-import { signOut } from '@/utils/auth'; // anything in the src dir, you can use the @ instead of relative paths
-import { useAuth } from '@/utils/context/authContext';
-
-function Home() {
+export default function Home() {
+  const [meals, setMeals] = useState([]);
   const { user } = useAuth();
 
+  useEffect(() => {
+    if (user?.uid) {
+      getMealsByUser(user.uid).then(setMeals);
+    }
+  }, [user]);
+
   return (
-    <div
-      className="text-center d-flex flex-column justify-content-center align-content-center"
-      style={{
-        height: '90vh',
-        padding: '30px',
-        maxWidth: '400px',
-        margin: '0 auto',
-      }}
-    >
-      <h1>Hello {user.displayName}! </h1>
-      <p>Click the button below to logout!</p>
-      <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
-        Sign Out
-      </Button>
-    </div>
+    <Container className="py-5">
+      <h1 className="text-center mb-4">Welcome to MealMate, {user?.displayName || 'friend'} 👋</h1>
+
+      {meals.length > 0 ? (
+        <Row xs={1} sm={2} md={3} className="g-4">
+          {meals.map((meal) => (
+            <Col key={meal.firebaseKey}>
+              <MealCard meal={meal} onUpdate={() => getMealsByUser(user.uid).then(setMeals)} />
+            </Col>
+          ))}
+        </Row>
+      ) : (
+        <div className="text-center">
+          <p>You have no added meals yet.</p>
+          <Button variant="primary" href="/meals/new">
+            + Add Your First Meal
+          </Button>
+        </div>
+      )}
+    </Container>
   );
 }
-
-export default Home;
