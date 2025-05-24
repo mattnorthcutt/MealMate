@@ -2,14 +2,15 @@
 import React from 'react';
 import Link from 'next/link';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
+import Image from 'next/image';
 import { signOut } from '../utils/auth';
 
 export default function NavBar() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Link passHref href="/" className='navbar-brand'>
-         CHANGE ME
+        <Link passHref href="/" className="navbar-brand">
+          <Image src="/images/MealMate Logo.png" alt="logo" width={60} height={60} />
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -18,10 +19,13 @@ export default function NavBar() {
             <Link className="nav-link" href="/">
               Home
             </Link>
+            <Link className="nav-link" href="/meals/new">
+              Create a Meal
+            </Link>
           </Nav>
 
           <Button variant="danger" onClick={signOut}>
-              Sign Out
+            Sign Out
           </Button>
         </Navbar.Collapse>
       </Container>
