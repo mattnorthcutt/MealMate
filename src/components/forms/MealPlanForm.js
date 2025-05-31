@@ -9,6 +9,7 @@ import { createMealPlan, updateMealPlan } from '../../api/mealPlanData';
 
 const initialState = {
   startDate: '',
+  mealPlanName: '',
 };
 
 export default function MealPlanForm({ obj = initialState }) {
@@ -52,6 +53,10 @@ export default function MealPlanForm({ obj = initialState }) {
   return (
     <Form onSubmit={handleSubmit} className="text-black">
       <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Meal Plan</h2>
+
+      <FloatingLabel controlId="floatingInput2" label="mealPlanName" className="mb-3">
+        <Form.Control type="text" placeholder="Meal Plan Name" name="mealPlanName" value={formInput.mealPlanName} onChange={handleChange} />
+      </FloatingLabel>
 
       <FloatingLabel controlId="floatingInput" label="Start Date of Meal Plan" className="mb-3">
         <Form.Control type="date" placeholder="Start Date" name="startDate" value={formInput.startDate} onChange={handleChange} required />

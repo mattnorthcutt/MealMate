@@ -19,6 +19,9 @@ export default function NavBar() {
             <Link className="nav-link" href="/">
               Home
             </Link>
+            <Link className="nav-link" href="/mealplans">
+              Meal Plans
+            </Link>
             <Link className="nav-link" href="/meals/new">
               Create a Meal
             </Link>
