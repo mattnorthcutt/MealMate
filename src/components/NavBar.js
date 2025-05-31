@@ -25,6 +25,9 @@ export default function NavBar() {
             <Link className="nav-link" href="/meals/new">
               Create a Meal
             </Link>
+            <Link className="nav-link" href="/mealplans/new">
+              Create a Meal Plan
+            </Link>
           </Nav>
 
           <Button variant="danger" onClick={signOut}>

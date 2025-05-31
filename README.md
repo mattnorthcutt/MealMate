@@ -1,61 +1,54 @@
-# NextJS with Firebase Auth App Router Template
+# MealMate 
 
-[See Live Demo of this Template](https://drt-next-js-template-app-router.netlify.app/)
+## Overview
 
-## Topics
-- [Get Started](#get-started)
-- [Starting the Project](#starting-the-project)
-- [Deploying on Netlify](#deploying-on-netlify)
-___
-## Getting Started
-### Use Template
-#### 1. To get started, click the GREEN "Use this Template" button at the top of the repo
-<img width="915" alt="Screen Shot 2022-07-06 at 12 54 01 PM" src="https://user-images.githubusercontent.com/29741570/177612998-4aac9237-5a1e-4f13-8ae0-468587521564.png">
+MealMate is a meal planning app that helps users easily organize their weekly meals based on their dietary preferences, time, and goals. Users can create and manage meals, assign them to weekly meal plans, and keep track of their meal planning history.
 
-#### 2. Make sure YOUR github account is selected in the dropdown and name your project
-<img width="763" alt="Screen Shot 2022-07-06 at 12 54 48 PM" src="https://user-images.githubusercontent.com/29741570/177613126-dd38f678-7553-4f27-8a4a-75680f14d71e.png">
+## Links
 
-#### 3. Clone your new repo to your local machine
-#### 4. Go to the **NEXT** section
+Wireframes: [https://www.figma.com/board/AvDOI4BRX2Zq9iRYtpp9Zz/Welcome-to-FigJam?node-id=0-1&t=aDd0u0LtQ5DOuSWE-1]
+Netlify Deployed Project: [https://mealmate.netlify.app/]
+Project Board: [https://github.com/users/mattnorthcutt/projects/4/views/1]
 
-## Starting the Project
-1. Create a Firebase project and set up authentication. Use [these videos](https://vimeo.com/showcase/codetracker-firebase) as a refresher if needed.
-1. Create a `.env` file at the root of the project
-1. Copy/Paste the contents of the `.env.sample` file to your newly created `.env` file.
-1. Copy over all of your Firebase values into the `.env` file.
-1. Open the `package.json` file and change the `name` property to the name of your application, and `author` to  your name.
-1. From your command line, be in the root directory and run `npm install` OR `npm i` for short.
-1. Next, run `npm run prepare`. This command sets up husky to track eslint errors on commit that will make your deploy fail on Netlify.
-1. Run `npx eslint . --ext .js,.jsx`
-1. To start your application, run `npm run dev`. THIS IS THE COMMAND YOU WILL USE TO RUN YOUR DEVELOPMENT SERVER FROM NOW ON.
-1. Open [http://localhost:3000](http://localhost:3000) with your browser.
+## User Desc
 
-### If you see this, you are set to go!
-<img width="450" alt="Screen Shot 2022-07-06 at 1 07 27 PM" src="https://github.com/user-attachments/assets/deae25f0-01d5-44b4-be60-7297b0f6f0ef">
+MealMate is designed for busy individuals who want to simplify meal planning. Whether you're managing a special diet, trying to save money, or just want to streamline your week, MealMate gives you a user-friendly way to plan, manage, and view your meals.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Features
 
-**NOTES:** 
-- If you see the following error, you did not follow all the setup steps correctly and failed to add your Firebase creds. Go back and do that NOW.
+- User authentication with Firebase Auth
+- Create / Read / Update / Delete Meals
+- View all Meals in a user friendly layout
+- Create Meal Plans with a start date and custom name
+- Assign Meals to a Meal Plan
+- View a Meal Plan and see all assigned Meals
+- Responsive design using React Bootstrap
 
-<img width="1043" alt="Screen Shot 2022-07-06 at 11 18 45 AM" src="https://user-images.githubusercontent.com/29741570/177612501-c2628f18-4bbd-4de9-aae6-27ffba1172d6.png">
+## Screenshots
 
-### Deploying on Netlify
-Netlify will automatically detect your project and prepopulate the settings, but should something go wrong and it does not, here are the commands:
+### Home Page
 
-- Build Command: `npm run build`
-- Publish directory: `.next`
+![Meals Page](./screenshots/home-page.png)
 
-#### Additional Steps to Take on Netlify
-- Add Environmental Variables
-    - Any Enviromental variables you are using in your `.env` file should be added to Netlify. 
-        - Go to Site settings > Build & deploy > Environment > Environment variables and the keys and values there if you did not add them when you were deploying your site
+### Meal Form
 
-- Update Firebase URL Settings
-    - In Firebase under Authentication select sign in methods, scroll to Authorized domains. Add your Netlify URL.
-        
-## Learn More about Next.js
-To learn more about Next.js, take a look at the following resources:
+![Meals Form](./screenshots/meal-form.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Meal Plans Page
+
+![Meal Plans Page](./screenshots/mealPlan-page.png)
+
+### Meal Plan Form
+
+![Meal Plan Form](./screenshots/mealPlan-form.png)
+
+### Viewing a Meal Plan
+
+![Viewing a Meal Plan](./screenshots/mealPlan-view.png)
+
+### Viewing a Meal
+
+![Viewing a Meal](./screenshots/meal-view.png)
+
+## Loom Walkthrough
+[https://www.loom.com/share/4cbb7b82a2aa45dca09a91e4506ccf3d]

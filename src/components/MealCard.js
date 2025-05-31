@@ -22,7 +22,7 @@ function MealCard({ meal, onUpdate }) {
           <Button href={`/meals/edit/${meal.firebaseKey}`} variant="outline-primary">
             Edit Meal
           </Button>
-          <Button href={`/meals/${meal.firebaseKey}`} variant="primary" className="m-2">
+          <Button href={`/meals/view/${meal.firebaseKey}`} variant="primary" className="m-2">
             VIEW
           </Button>
           <Button variant="danger" onClick={deleteThisMeal} className="m-2">
