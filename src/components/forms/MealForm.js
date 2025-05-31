@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { Form, FloatingLabel, Button } from 'react-bootstrap';
 import { createMeals, updateMeals } from '../../api/mealData';
 import { useAuth } from '../../utils/context/authContext';
+import { getMealPlansByUser } from '../../api/mealPlanData';
 
 const initialState = {
   name: '',
@@ -13,16 +14,22 @@ const initialState = {
   ingredients: '',
   mealPrefs: '',
   img: '',
+  mealPlanId: '',
 };
 
 function MealForm({ obj = initialState }) {
   const [formInput, setFormInput] = useState(obj);
+  const [mealPlans, setMealPlans] = useState([]);
   const { user } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
     if (obj.firebaseKey) setFormInput(obj);
   }, [obj]);
+
+  useEffect(() => {
+    getMealPlansByUser(user.uid).then(setMealPlans);
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -74,6 +81,17 @@ function MealForm({ obj = initialState }) {
 
         <FloatingLabel controlId="floatingInput5" label="Image URL" className="mb-3">
           <Form.Control type="url" placeholder="Meal Image URL" name="img" value={formInput.img} onChange={handleChange} />
+        </FloatingLabel>
+
+        <FloatingLabel controlId="floatingInput6" label="Assign to Meal Plan" className="mb-3">
+          <Form.Select name="mealPlanId" value={formInput.mealPlanId} onChange={handleChange}>
+            <option value="">-- Select a Meal Plan --</option>
+            {mealPlans.map((plan) => (
+              <option key={plan.firebaseKey} value={plan.firebaseKey}>
+                {plan.mealPlanName}
+              </option>
+            ))}
+          </Form.Select>
         </FloatingLabel>
 
         <Button type="submit" variant="primary">

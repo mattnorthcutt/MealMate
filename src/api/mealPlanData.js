@@ -15,6 +15,19 @@ const getMealPlansByUser = (uid) =>
       .catch(reject);
   });
 
+const getSingleMealPlan = (firebaseKey) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/mealPlans/${firebaseKey}.json`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch(reject);
+  });
+
 const createMealPlan = (payload) =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/mealPlans.json`, {
@@ -45,9 +58,9 @@ const deleteMealPlan = (firebaseKey) =>
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     })
-      .then((res) => res.json())
+      .then((response) => response.json())
       .then(resolve)
       .catch(reject);
   });
 
-export { getMealPlansByUser, createMealPlan, updateMealPlan, deleteMealPlan };
+export { getMealPlansByUser, createMealPlan, updateMealPlan, deleteMealPlan, getSingleMealPlan };

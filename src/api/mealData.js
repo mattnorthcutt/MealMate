@@ -15,6 +15,19 @@ const getMealsByUser = (uid) =>
       .catch(reject);
   });
 
+const getMealsByMealPlanId = (mealPlanId) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/meals.json?orderBy="mealPlanId"&equalTo="${mealPlanId}"`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => resolve(Object.values(data)))
+      .catch(reject);
+  });
+
 const getMealsByFirebaseKey = (firebaseKey) =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/meals/${firebaseKey}.json`, {
@@ -82,4 +95,4 @@ const updateMeals = (payload) =>
       .catch(reject);
   });
 
-export { createMeals, updateMeals, getMealsByUser, deleteMeals, getSingleMeal, getMealsByFirebaseKey };
+export { createMeals, updateMeals, getMealsByUser, deleteMeals, getSingleMeal, getMealsByFirebaseKey, getMealsByMealPlanId };
