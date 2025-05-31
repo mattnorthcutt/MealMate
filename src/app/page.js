@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <Container className="py-5">
-      <h1 className="text-center mb-4">Welcome to MealMate, {user?.displayName || 'friend'} 👋</h1>
+      <h1 className="text-center mb-4">Welcome to MealMate, {user?.displayName || 'friend'}</h1>
 
       {meals.length > 0 ? (
         <Row xs={1} sm={2} md={3} className="g-4">
