@@ -28,7 +28,7 @@ MealMate is designed for busy individuals who want to simplify meal planning. Wh
 
 ### Home Page
 
-![Meals Page](./screenshots/home-page.PNG)
+![Meals Page](./screenshots/home-page.png)
 
 ### Meal Form
 
