@@ -7,6 +7,7 @@ import { getMealPlansByUser } from '@/api/mealPlanData';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import MealCard from '@/components/MealCard';
 import MealPlanCard from '@/components/MealPlanCard';
+import MealSuggestionSearch from '@/components/MealSugSearch';
 import Link from 'next/link';
 
 export default function Home() {
@@ -33,32 +34,32 @@ export default function Home() {
       <div
         className="p-5 mb-5 text-white text-center rounded"
         style={{
-          background: 'linear-gradient(90deg,rgb(191, 86, 0) 0%,rgb(83, 8, 5) 100%)',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+          background: 'linear-gradient(90deg, rgb(191, 86, 0) 0%, rgb(83, 8, 5) 100%)',
+          boxShadow: '0 6px 16px rgba(0,0,0,0.3)',
         }}
       >
-        <h1 className="fw-bold display-5">Welcome to MealMate! 0_0</h1>
-        <p className="lead">Plan your meals. Track your nutrition. Stay organized!</p>
+        <h1 className="fw-bold display-4">Welcome to MealMate </h1>
+        <p className="lead mb-0">Plan your meals. Track nutrition. Stay organized.</p>
       </div>
 
-      {/* Quick Actions */}
-      <div className="d-flex justify-content-center gap-3 mb-5">
+      {/* Action Buttons */}
+      <div className="d-flex justify-content-center gap-4 mb-5 flex-wrap">
         <Link href="/meals/new" passHref>
-          <Button variant="success" className="px-4 py-2 fw-bold">
-            Add New Meal
+          <Button variant="success" size="lg" className="px-4 py-2 fw-bold shadow-sm">
+            + Add New Meal
           </Button>
         </Link>
         <Link href="/mealplans" passHref>
-          <Button variant="info" className="px-4 py-2 fw-bold">
+          <Button variant="info" size="lg" className="px-4 py-2 fw-bold shadow-sm">
             View Meal Plans
           </Button>
         </Link>
       </div>
 
-      {/* Current Meal Plan Section */}
+      {/* Meal Plans Section */}
       <Card className="mb-5 shadow-lg border-0">
         <Card.Body>
-          <Card.Title className="fw-bold text-info mb-3">My Meal Plans</Card.Title>
+          <Card.Title className="fw-bold text-info mb-4 fs-3"> My Meal Plans</Card.Title>
           {mealPlans.length ? (
             <Row xs={1} md={2} lg={3} className="g-4">
               {mealPlans.map((plan) => (
@@ -73,10 +74,18 @@ export default function Home() {
         </Card.Body>
       </Card>
 
+      {/* Meal Suggestions Section */}
+      <Card className="mb-5 shadow-lg border-0 bg-light">
+        <Card.Body>
+          <Card.Title className="fw-bold text-warning mb-4 fs-3"> Meal Suggestions</Card.Title>
+          <MealSuggestionSearch />
+        </Card.Body>
+      </Card>
+
       {/* My Meals Section */}
       <Card className="mb-5 shadow-lg border-0">
         <Card.Body>
-          <Card.Title className="fw-bold text-primary mb-3">My Meals</Card.Title>
+          <Card.Title className="fw-bold text-primary mb-4 fs-3"> My Meals</Card.Title>
           {meals.length ? (
             <Row xs={1} md={2} lg={3} className="g-4">
               {meals.map((meal) => (
@@ -92,7 +101,7 @@ export default function Home() {
       </Card>
 
       {/* Footer */}
-      <p className="text-center text-muted mt-5">MealMate © 2025 — Stay Healthy, Stay Organized!</p>
+      <p className="text-center text-muted mt-5">MealMate © 2025 — Stay Healthy, Stay Organized </p>
     </Container>
   );
 }
