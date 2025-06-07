@@ -28,7 +28,9 @@ export default function MealPlansPage() {
         {/* For Stretch */}
         <Col className="text-end">
           <Link href="/mealplans/new" passHref>
-            <Button variant="success">+ New Meal Plan</Button>
+            <Button variant="success" className="rounded-pill px-4">
+              + New Meal Plan
+            </Button>
           </Link>
         </Col>
       </Row>
