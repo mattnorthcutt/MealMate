@@ -77,7 +77,7 @@ const createMeals = (payload) =>
       body: JSON.stringify(payload),
     })
       .then((response) => response.json())
-      .then((data) => resolve(data.name))
+      .then((data) => resolve(data))
       .catch(reject);
   });
 

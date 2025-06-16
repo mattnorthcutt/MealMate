@@ -38,7 +38,7 @@ export default function Home() {
           boxShadow: '0 6px 16px rgba(0,0,0,0.3)',
         }}
       >
-        <h1 className="fw-bold display-4">Welcome to MealMate </h1>
+        <h1 className="fw-bold display-4 mt-">Welcome to MealMate </h1>
         <p className="lead mb-0">Plan your meals. Track nutrition. Stay organized.</p>
       </div>
 

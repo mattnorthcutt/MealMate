@@ -2,41 +2,56 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Button, Row, Col } from 'react-bootstrap';
+import { Card, Dropdown } from 'react-bootstrap';
 import Link from 'next/link';
-import { deleteMealPlan } from '../api/mealPlanData';
+import { deleteMealPlan } from '@/api/mealPlanData';
 
 export default function MealPlanCard({ plan, onUpdate }) {
-  const handleDelete = () => {
-    if (window.confirm(`Delete Meal Plan for ${plan.startDate}?`)) {
+  const deleteThisPlan = () => {
+    if (window.confirm(`Delete "${plan.mealPlanName}"?`)) {
       deleteMealPlan(plan.firebaseKey).then(onUpdate);
     }
   };
 
   return (
-    <Card className="shadow-sm mb-4 border-0">
+    <Card
+      className="shadow-sm border-0"
+      style={{
+        borderRadius: '12px',
+        marginTop: '10px',
+        background: '#fffaf5',
+      }}
+    >
       <Card.Body>
-        <Row className="align-items-center">
-          <Col md={8}>
-            <h5 className="mb-1">Week of {plan.mealPlanName}</h5>
-            <small className="text-muted">Created: {new Date(plan?.createdTime).toLocaleDateString()}</small>
-          </Col>
-          <Col md={4} className="text-end">
-            <Link href={`/mealplans/view/${plan.firebaseKey}`} passHref>
-              <Button variant="primary" className="rounded-pill px-4">
+        <Card.Title className="d-flex justify-content-between align-items-start">
+          <span>{plan.mealPlanName || 'Untitled Plan'}</span>
+
+          <Dropdown>
+            <Dropdown.Toggle variant="light" size="sm" id="dropdown-basic">
+              ⋮
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item as={Link} href={`/mealplans/view/${plan.firebaseKey}`}>
                 View
-              </Button>
-            </Link>
-            <Link href={`/mealplans/edit/${plan.firebaseKey}`} passHref>
-              <Button variant="secondary" className="rounded-pill px-4 me-2">
+              </Dropdown.Item>
+              <Dropdown.Item as={Link} href={`/mealplans/edit/${plan.firebaseKey}`}>
                 Edit
-              </Button>
-            </Link>
-            <Button variant="danger" className="rounded-pill px-4 me-2" onClick={handleDelete}>
-              Delete
-            </Button>
-          </Col>
-        </Row>
+              </Dropdown.Item>
+              <Dropdown.Item onClick={deleteThisPlan} className="text-danger">
+                Delete
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </Card.Title>
+
+        <Card.Text className="text-muted mb-1">
+          <strong>Start Date:</strong> {plan.startDate ? new Date(plan.startDate).toLocaleDateString() : 'N/A'}
+        </Card.Text>
+
+        <Card.Text style={{ fontSize: '0.9rem' }}>
+          <strong>Created:</strong> {plan.createdTime ? new Date(plan.createdTime).toLocaleDateString() : 'N/A'}
+        </Card.Text>
       </Card.Body>
     </Card>
   );
@@ -44,10 +59,10 @@ export default function MealPlanCard({ plan, onUpdate }) {
 
 MealPlanCard.propTypes = {
   plan: PropTypes.shape({
-    firebaseKey: PropTypes.string,
-    startDate: PropTypes.string,
     mealPlanName: PropTypes.string,
+    startDate: PropTypes.string,
     createdTime: PropTypes.string,
+    firebaseKey: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };

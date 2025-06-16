@@ -1,36 +1,58 @@
 'use client';
 
 import React from 'react';
-import { Card, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import { Card, Dropdown } from 'react-bootstrap';
+import Link from 'next/link';
 import { deleteMeals } from '../api/mealData';
 
-function MealCard({ meal, onUpdate }) {
+export default function MealCard({ meal, onUpdate }) {
   const deleteThisMeal = () => {
     if (window.confirm(`Delete ${meal.name}?`)) {
-      deleteMeals(meal.firebaseKey).then(() => onUpdate());
+      deleteMeals(meal.firebaseKey).then(onUpdate);
     }
   };
 
   return (
-    <div>
-      <Card className="h-100 shadow-sm">
-        {meal.img && <Card.Img variant="top" src={meal.img} alt={meal.name} />}
-        <Card.Body>
-          <Card.Title>{meal.name}</Card.Title>
-          <Card.Text>{meal.description || 'No description added yet.'}</Card.Text>
-          <Button href={`/meals/edit/${meal.firebaseKey}`} variant="outline-primary" className="rounded-pill px-4 me-2">
-            Edit Meal
-          </Button>
-          <Button href={`/meals/view/${meal.firebaseKey}`} variant="primary" className="rounded-pill px-4 me-2">
-            VIEW
-          </Button>
-          <Button variant="danger" className="rounded-pill px-4 me-2" onClick={deleteThisMeal}>
-            DELETE
-          </Button>
-        </Card.Body>
-      </Card>
-    </div>
+    <Card
+      className="shadow-sm border-0"
+      style={{
+        borderRadius: '12px',
+        background: '#fffaf5',
+      }}
+    >
+      {meal.img && <Card.Img variant="top" src={meal.img} alt={meal.name} style={{ borderTopLeftRadius: '12px', borderTopRightRadius: '12px', height: '200px', objectFit: 'cover' }} />}
+
+      <Card.Body>
+        <Card.Title className="d-flex justify-content-between align-items-start">
+          <span>{meal.name}</span>
+
+          <Dropdown>
+            <Dropdown.Toggle variant="light" size="sm" id="dropdown-basic">
+              ⋮
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item as={Link} href={`/meals/view/${meal.firebaseKey}`}>
+                View
+              </Dropdown.Item>
+              <Dropdown.Item as={Link} href={`/meals/edit/${meal.firebaseKey}`}>
+                Edit
+              </Dropdown.Item>
+              <Dropdown.Item onClick={deleteThisMeal} className="text-danger">
+                Delete
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </Card.Title>
+
+        <Card.Text className="text-muted mb-1">{meal.description || 'No description added yet.'}</Card.Text>
+
+        <Card.Text style={{ fontSize: '0.9rem' }}>
+          <strong>Tags:</strong> {meal.mealPrefs || 'None'}
+        </Card.Text>
+      </Card.Body>
+    </Card>
   );
 }
 
@@ -39,9 +61,8 @@ MealCard.propTypes = {
     img: PropTypes.string,
     name: PropTypes.string,
     description: PropTypes.string,
+    mealPrefs: PropTypes.string,
     firebaseKey: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
-
-export default MealCard;
