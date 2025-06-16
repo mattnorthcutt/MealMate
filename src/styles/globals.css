@@ -2,3 +2,7 @@ body {
   background: black;
   color: white;
 }
+
+.bg-login {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+}

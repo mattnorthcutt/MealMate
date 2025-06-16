@@ -1,34 +1,37 @@
 'use client';
 
-import React from 'react';
-import { Card, Button } from 'react-bootstrap';
-import Link from 'next/link';
 import PropTypes from 'prop-types';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import { useRouter } from 'next/navigation';
+import { getMealDetailsById } from '@/api/mealSugData';
 
 export default function RecipeCard({ recipe }) {
+  const router = useRouter();
+
+  const handleAddToMeals = () => {
+    getMealDetailsById(recipe.id).then((details) => {
+      const query = new URLSearchParams({
+        name: details.title,
+        img: details.image,
+        description: details.summary?.replace(/<[^>]+>/g, '').slice(0, 150),
+        ingredients: details.extendedIngredients?.map((ing) => ing.original).join(', '),
+        mealPrefs: details.dishTypes?.join(', ') || '',
+      }).toString();
+
+      router.push(`/meals/new?${query}`);
+    });
+  };
+
   return (
-    <Card className="mb-4 shadow-sm">
-      {recipe.image && <Card.Img variant="top" src={recipe.image} alt={recipe.title} />}
+    <Card className="shadow-sm border-0" style={{ borderRadius: '12px', background: '#fdfaf6' }}>
+      <Card.Img variant="top" src={recipe.image} alt={recipe.title} style={{ borderTopLeftRadius: '12px', borderTopRightRadius: '12px', height: '200px', objectFit: 'cover' }} />
       <Card.Body>
         <Card.Title>{recipe.title}</Card.Title>
-
-        {/* Save to My Meals Button */}
-        <Link
-          href={{
-            pathname: '/meals/new',
-            query: {
-              name: recipe.title,
-              description: recipe.summary,
-              img: recipe.image,
-              ingredients: recipe.extendedIngredients ? recipe.extendedIngredients.map((ing) => ing.original).join(', ') : '',
-            },
-          }}
-          passHref
-        >
-          <Button variant="primary" size="sm" className="mt-2">
-            Save to My Meals
-          </Button>
-        </Link>
+        <Card.Text style={{ fontSize: '0.9rem' }}>{(recipe.summary?.replace(/<[^>]+>/g, '') || '').slice(0, 120)}...</Card.Text>
+        <Button variant="primary" size="sm" onClick={handleAddToMeals}>
+          Add to My Meals
+        </Button>
       </Card.Body>
     </Card>
   );
@@ -36,13 +39,9 @@ export default function RecipeCard({ recipe }) {
 
 RecipeCard.propTypes = {
   recipe: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     image: PropTypes.string,
     summary: PropTypes.string,
-    extendedIngredients: PropTypes.arrayOf(
-      PropTypes.shape({
-        original: PropTypes.string,
-      }),
-    ),
   }).isRequired,
 };
