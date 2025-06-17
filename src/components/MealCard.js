@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Dropdown } from 'react-bootstrap';
 import Link from 'next/link';
@@ -14,16 +13,10 @@ export default function MealCard({ meal, onUpdate }) {
   };
 
   return (
-    <Card
-      className="shadow-sm border-0"
-      style={{
-        borderRadius: '12px',
-        background: '#fffaf5',
-      }}
-    >
+    <Card className="mealmate-card shadow-sm border-0">
       {meal.img && <Card.Img variant="top" src={meal.img} alt={meal.name} style={{ borderTopLeftRadius: '12px', borderTopRightRadius: '12px', height: '200px', objectFit: 'cover' }} />}
 
-      <Card.Body>
+      <Card.Body style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
         <Card.Title className="d-flex justify-content-between align-items-start">
           <span>{meal.name}</span>
 
@@ -46,7 +39,9 @@ export default function MealCard({ meal, onUpdate }) {
           </Dropdown>
         </Card.Title>
 
-        <Card.Text className="text-muted mb-1">{meal.description || 'No description added yet.'}</Card.Text>
+        <Card.Text className="text-muted text-truncate mb-1" style={{ maxHeight: '60px', minHeight: '60px' }}>
+          {meal.description || 'No description added yet.'}
+        </Card.Text>
 
         <Card.Text style={{ fontSize: '0.9rem' }}>
           <strong>Tags:</strong> {meal.mealPrefs || 'None'}

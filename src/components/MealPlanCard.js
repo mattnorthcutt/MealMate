@@ -14,14 +14,7 @@ export default function MealPlanCard({ plan, onUpdate }) {
   };
 
   return (
-    <Card
-      className="shadow-sm border-0"
-      style={{
-        borderRadius: '12px',
-        marginTop: '10px',
-        background: '#fffaf5',
-      }}
-    >
+    <Card className="mealmate-card shadow-sm border-0">
       <Card.Body>
         <Card.Title className="d-flex justify-content-between align-items-start">
           <span>{plan.mealPlanName || 'Untitled Plan'}</span>

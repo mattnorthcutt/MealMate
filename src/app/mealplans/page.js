@@ -25,7 +25,6 @@ export default function MealPlansPage() {
         <Col>
           <h1 className="fw-bold">Your Meal Plans</h1>
         </Col>
-        {/* For Stretch */}
         <Col className="text-end">
           <Link href="/mealplans/new" passHref>
             <Button variant="success" className="rounded-pill px-4">
@@ -34,8 +33,7 @@ export default function MealPlansPage() {
           </Link>
         </Col>
       </Row>
-
-      {mealPlans.length ? mealPlans.map((plan) => <MealPlanCard key={plan.firebaseKey} plan={plan} onUpdate={fetchMealPlans} />) : <p className="text-muted">No meal plans yet. Assign a meal to a plan using the Meal Form!</p>}
+      <div style={{ backgroundColor: '#f8f9fa', padding: '2rem', borderRadius: '12px' }}>{mealPlans.length ? mealPlans.map((plan) => <MealPlanCard key={plan.firebaseKey} plan={plan} onUpdate={fetchMealPlans} />) : <p className="text-muted">No meal plans yet. Assign a meal to a plan using the Meal Form!</p>}</div>
     </Container>
   );
 }
