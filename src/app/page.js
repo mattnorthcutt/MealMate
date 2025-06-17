@@ -30,7 +30,6 @@ export default function Home() {
 
   return (
     <Container className="py-5">
-      {/* Hero Section */}
       <div
         className="p-5 mb-5 text-white text-center rounded"
         style={{
@@ -42,7 +41,6 @@ export default function Home() {
         <p className="lead mb-0">Plan your meals. Track nutrition. Stay organized.</p>
       </div>
 
-      {/* Action Buttons */}
       <div className="d-flex justify-content-center gap-4 mb-5 flex-wrap">
         <Link href="/meals/new" passHref>
           <Button variant="success" size="lg" className="px-4 py-2 fw-bold shadow-sm">
@@ -56,51 +54,53 @@ export default function Home() {
         </Link>
       </div>
 
-      {/* Meal Plans Section */}
-      <Card className="mb-5 shadow-lg border-0">
-        <Card.Body>
-          <Card.Title className="fw-bold text-info mb-4 fs-3"> My Meal Plans</Card.Title>
-          {mealPlans.length ? (
-            <Row xs={1} md={2} lg={3} className="g-4">
-              {mealPlans.map((plan) => (
-                <Col key={plan.firebaseKey}>
-                  <MealPlanCard plan={plan} onUpdate={getMealPlans} />
-                </Col>
-              ))}
-            </Row>
-          ) : (
-            <p className="text-muted">No meal plans yet. Head to Meal Plans to create one!</p>
-          )}
-        </Card.Body>
-      </Card>
+      <div className="meal-card-container">
+        <Card className="mealmate-card mb-5 shadow-lg border-0">
+          <Card.Body>
+            <Card.Title className="fw-bold text-dark mb-4 fs-3"> My Meal Plans</Card.Title>
+            {mealPlans.length ? (
+              <Row xs={1} md={2} lg={3} className="g-4">
+                {mealPlans.map((plan) => (
+                  <Col key={plan.firebaseKey}>
+                    <MealPlanCard plan={plan} onUpdate={getMealPlans} />
+                  </Col>
+                ))}
+              </Row>
+            ) : (
+              <p className="text-muted">No meal plans yet. Head to Meal Plans to create one!</p>
+            )}
+          </Card.Body>
+        </Card>
+      </div>
 
-      {/* Meal Suggestions Section */}
-      <Card className="mb-5 shadow-lg border-0 bg-light">
-        <Card.Body>
-          <Card.Title className="fw-bold text-warning mb-4 fs-3"> Meal Suggestions</Card.Title>
-          <MealSuggestionSearch />
-        </Card.Body>
-      </Card>
+      <div className="meal-card-container">
+        <Card className="mealmate-card mb-5 shadow-lg border-0 bg-light">
+          <Card.Body>
+            <Card.Title className="fw-bold text-dark mb-4 fs-3"> Meal Suggestions</Card.Title>
+            <MealSuggestionSearch />
+          </Card.Body>
+        </Card>
+      </div>
 
-      {/* My Meals Section */}
-      <Card className="mb-5 shadow-lg border-0">
-        <Card.Body>
-          <Card.Title className="fw-bold text-primary mb-4 fs-3"> My Meals</Card.Title>
-          {meals.length ? (
-            <Row xs={1} md={2} lg={3} className="g-4">
-              {meals.map((meal) => (
-                <Col key={meal.firebaseKey}>
-                  <MealCard meal={meal} onUpdate={getMeals} />
-                </Col>
-              ))}
-            </Row>
-          ) : (
-            <p className="text-muted">No meals added yet. Add a meal to get started!</p>
-          )}
-        </Card.Body>
-      </Card>
+      <div className="meal-card-container">
+        <Card className="shadow-sm border-0 mealmate-card">
+          <Card.Body>
+            <Card.Title className="fw-bold text-dark mb-4 fs-3"> My Meals</Card.Title>
+            {meals.length ? (
+              <Row xs={1} md={2} lg={3} className="g-4">
+                {meals.map((meal) => (
+                  <Col key={meal.firebaseKey}>
+                    <MealCard meal={meal} onUpdate={getMeals} />
+                  </Col>
+                ))}
+              </Row>
+            ) : (
+              <p className="text-muted">No meals added yet. Add a meal to get started!</p>
+            )}
+          </Card.Body>
+        </Card>
+      </div>
 
-      {/* Footer */}
       <p className="text-center text-muted mt-5">MealMate © 2025 — Stay Healthy, Stay Organized </p>
     </Container>
   );
